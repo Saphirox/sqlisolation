@@ -1,0 +1,28 @@
+services:
+  percona:
+    container_name: percona
+    platform: linux/amd64
+    image: percona/percona-server:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: 123456
+    ports:
+      - "3306:3306"
+    volumes:
+     - percona-data:/var/lib/percona
+    networks:
+      backend:
+  postgres:
+    image: postgres
+    ports:
+      - 5432:5432
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_PASSWORD=123456
+
+volumes:
+  percona-data:
+  postgres-data:
+
+networks:
+  backend:
